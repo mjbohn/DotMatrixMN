@@ -86,27 +86,7 @@ namespace DotMatrixMN
         public event MatrixChangedEventHandler? MatrixChanged;
         protected virtual void onMatrixChanged()
         {
-            MatrixChanged?.Invoke(getDots());
-        }
-
-        private int[] getDots()
-        {
-            int[] dots = new int[MatrixWidth];
-            for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)
-            {
-                for (int j = 0; j < 16; j++)
-                {
-                    if (pixels[i].Row == j)
-                    {
-                        if (pixels[i].Enabled)
-                        {
-                            dots[j] += (int)Math.Pow(2, pixels[i].BinaryValue);
-                        }
-                    }
-                }
-            }
-
-            return dots;
+            MatrixChanged?.Invoke(GetDots());
         }
 
         public Matrix() : this(8,8){}
@@ -114,9 +94,9 @@ namespace DotMatrixMN
         {
             MatrixWidth = width;
             MatrixHeight = height;
-            
+
             pixels = new Pixel[height * width];
-            
+
             this.SetStyle(ControlStyles.DoubleBuffer, true);
             this.Size = new Size(80, 80);
             this.BackColor = SystemColors.ControlDarkDark;
@@ -128,7 +108,12 @@ namespace DotMatrixMN
             this.Margin = new Padding(0);
             this.TeachMode = false;
             this.ShowNumbers = false;
+            
+            BuildPixelArray(MatrixHeight, MatrixWidth);
+        }
 
+        private void BuildPixelArray(int height, int width)
+        {
             int row = 0;
             int column = 0;
             for (int i = 0; i < (height * width); i++)
@@ -148,6 +133,26 @@ namespace DotMatrixMN
                 pixels[i].Rect = new Rectangle(PixelWidth * pixels[i].Column, PixelHeight * pixels[i].Row, PixelWidth, PixelHeight);
 
             }
+        }
+
+        private int[] GetDots()
+        {
+            int[] dots = new int[MatrixWidth];
+            for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)
+            {
+                for (int j = 0; j < MatrixHeight; j++)
+                {
+                    if (pixels[i].Row == j)
+                    {
+                        if (pixels[i].Enabled)
+                        {
+                            dots[j] += (int)Math.Pow(2, pixels[i].BinaryValue);
+                        }
+                    }
+                }
+            }
+
+            return dots;
         }
 
         protected override void OnPaint(PaintEventArgs e)

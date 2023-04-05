@@ -12,13 +12,16 @@
 
   <ItemGroup>
     <Reference Include="System.Drawing.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Drawing.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Drawing.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Windows.Forms.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Windows.Forms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms.Primitives">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Windows.Forms.Primitives.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\6.0.15\System.Windows.Forms.Primitives.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
 
