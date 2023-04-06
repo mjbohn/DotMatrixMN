@@ -20,7 +20,8 @@ namespace DotMatrixMN
         private Style _displayStyle;
         private bool _teachMode;
         private bool _showNumbers;
-
+        private int _matrixWidth;
+        private int _matrixHeight;
         public bool TeachMode
         {
             get { return _teachMode; }
@@ -78,8 +79,19 @@ namespace DotMatrixMN
 
         public int PixelHeight { get => _pixelHeight; set => _pixelHeight = value; }
         public int PixelWidth { get => _pixelWidth; set => _pixelWidth = value; }
-        public int MatrixWidth { get; private set; }
-        public int MatrixHeight { get; private set; }
+        public int MatrixWidth 
+        { 
+            get { return _matrixWidth; }
+            private set { _matrixWidth = value; }
+        }
+        public int MatrixHeight 
+        { 
+            get {return _matrixHeight; }
+            private set { _matrixHeight = value; }
+        }
+
+        //public int MatrixWidth { get; private set; }
+        //public int MatrixHeight { get; private set; }
 
         #endregion
 
@@ -108,7 +120,7 @@ namespace DotMatrixMN
             this.Margin = new Padding(0);
             this.TeachMode = false;
             this.ShowNumbers = false;
-            
+
             BuildPixelArray(MatrixHeight, MatrixWidth);
         }
 
@@ -153,6 +165,41 @@ namespace DotMatrixMN
             }
 
             return dots;
+        }
+
+        public void setMatrix(int[] charToDisplay)
+        {
+            for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)  // all Dots
+            {
+                for (int j = 0; j < MatrixHeight; j++) //  Rows
+                {
+                    if (pixels[i].Row == j)
+                    {
+                        if (pixels[i].BinaryValue < 8) // LowByte
+                        {
+                            byte value = (byte)(Math.Pow(2, pixels[i].BinaryValue));
+
+                            byte mask = (byte)charToDisplay[j];
+                            byte check = (byte)(value & mask);
+
+                            pixels[i].Enabled = (check == value);
+
+
+                        }
+                        else  // HighByte
+                        {
+                            int value = (int)(Math.Pow(2, pixels[i].BinaryValue)) >> 8;
+                            int mask = charToDisplay[j] >> 8;
+
+                            byte check = (byte)(value & mask);
+
+                            pixels[i].Enabled = (check == value);
+                        }
+                    }
+                }
+            }
+            this.Invalidate();
+            onMatrixChanged();
         }
 
         protected override void OnPaint(PaintEventArgs e)
