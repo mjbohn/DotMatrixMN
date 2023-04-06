@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace DotMatrixMN
 {
     public delegate void MatrixChangedEventHandler(int[] dots);
-    
+
     public class Matrix : Control
     {
         private Pixel[] pixels;
@@ -79,14 +79,14 @@ namespace DotMatrixMN
 
         public int PixelHeight { get => _pixelHeight; set => _pixelHeight = value; }
         public int PixelWidth { get => _pixelWidth; set => _pixelWidth = value; }
-        public int MatrixWidth 
-        { 
+        public int MatrixWidth
+        {
             get { return _matrixWidth; }
             private set { _matrixWidth = value; }
         }
-        public int MatrixHeight 
-        { 
-            get {return _matrixHeight; }
+        public int MatrixHeight
+        {
+            get { return _matrixHeight; }
             private set { _matrixHeight = value; }
         }
 
@@ -101,7 +101,7 @@ namespace DotMatrixMN
             MatrixChanged?.Invoke(GetDots());
         }
 
-        public Matrix() : this(8,8){}
+        public Matrix() : this(8, 8) { }
         public Matrix(int height, int width) : base()
         {
             MatrixWidth = width;
@@ -183,7 +183,7 @@ namespace DotMatrixMN
         {
             if (charToDisplay.Length != MatrixHeight)
             {
-                throw new ArgumentException("PixelCount doesn't match MatrixHeight of "+ MatrixHeight.ToString(),nameof(charToDisplay));
+                throw new ArgumentException("PixelCount doesn't match MatrixHeight of " + MatrixHeight.ToString(), nameof(charToDisplay));
             }
             for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)  // all Dots
             {
