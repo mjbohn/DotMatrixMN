@@ -169,12 +169,22 @@ namespace DotMatrixMN
 
         public void setMatrix(int[] charToDisplay)
         {
+            if (charToDisplay.Length != MatrixHeight)
+            {
+                throw new ArgumentException("PixelCount doesn't match MatrixHeight of "+ MatrixHeight.ToString(),nameof(charToDisplay));
+            }
             for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)  // all Dots
             {
+
                 for (int j = 0; j < MatrixHeight; j++) //  Rows
                 {
                     if (pixels[i].Row == j)
                     {
+                        if (charToDisplay[j] > Math.Pow(2, MatrixWidth))
+                        {
+                            throw new ArgumentException("PixelCount doesn't match MatrixWidth of " + MatrixWidth.ToString(), nameof(charToDisplay));
+                        }
+
                         if (pixels[i].BinaryValue < 8) // LowByte
                         {
                             byte value = (byte)(Math.Pow(2, pixels[i].BinaryValue));
