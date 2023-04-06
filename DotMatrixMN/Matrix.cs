@@ -167,6 +167,18 @@ namespace DotMatrixMN
             return dots;
         }
 
+        public Bitmap getBitmap()
+        {
+            Bitmap bmp = new Bitmap(MatrixWidth, MatrixHeight);
+
+            for (int i = 0; i < (MatrixWidth * MatrixHeight); i++)
+            {
+                Color color = pixels[i].Color;
+                bmp.SetPixel(pixels[i].Column, pixels[i].Row, pixels[i].Color);
+            }
+            return bmp;
+        }
+
         public void setMatrix(int[] charToDisplay)
         {
             if (charToDisplay.Length != MatrixHeight)
@@ -345,7 +357,7 @@ namespace DotMatrixMN
         }
     }
 
-    class Pixel
+    public class Pixel
     {
         public Pixel()
         {
