@@ -101,8 +101,8 @@ namespace DotMatrixMN
             MatrixChanged?.Invoke(GetDots());
         }
 
-        public Matrix() : this(8, 8) { }
-        public Matrix(int height, int width) : base()
+        public Matrix() : this(8, 8, new Size(20,20)) { }
+        public Matrix(int height, int width, Size size) : base()
         {
             MatrixWidth = width;
             MatrixHeight = height;
@@ -110,11 +110,13 @@ namespace DotMatrixMN
             pixels = new Pixel[height * width];
 
             this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.Size = new Size(80, 80);
+            this.Size = size;
             this.BackColor = SystemColors.ControlDarkDark;
             this.ForeColor = Color.Lime;
-            this.ColorDisabled = Color.DarkRed;
-            this.ColorEnabled = Color.Red;
+            //this.ColorDisabled = Color.DarkRed;
+            //this.ColorEnabled = Color.Red;
+            this.ColorDisabled = Color.FromArgb(0x15, 0x08, 0x96);
+            this.ColorEnabled = Color.FromArgb(0x77, 0x6c, 0xf9);
             this.ShowBorders = false;
             this.DisplayStyle = Style.Rectagles;
             this.Margin = new Padding(0);
