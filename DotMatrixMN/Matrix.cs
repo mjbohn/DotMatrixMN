@@ -22,6 +22,10 @@ namespace DotMatrixMN
         private bool _showNumbers;
         private int _matrixWidth;
         private int _matrixHeight;
+        private int _screenRow;
+        private int _screenColumn;
+        private Point _screenLocation;
+
         public bool TeachMode
         {
             get { return _teachMode; }
@@ -89,6 +93,10 @@ namespace DotMatrixMN
             get { return _matrixHeight; }
             private set { _matrixHeight = value; }
         }
+
+        public int ScreenRow { get => _screenRow; set => _screenRow = value; }
+        public int ScreenColumn { get => _screenColumn; set => _screenColumn = value; }
+        public Point ScreenLocation { get => _screenLocation; set => _screenLocation = value; }
 
         //public int MatrixWidth { get; private set; }
         //public int MatrixHeight { get; private set; }
