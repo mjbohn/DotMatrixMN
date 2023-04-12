@@ -104,7 +104,7 @@ namespace DotMatrixMN
         #endregion
 
         public event MatrixChangedEventHandler? MatrixChanged;
-        protected virtual void onMatrixChanged()
+        protected virtual void OnMatrixChanged()
         {
             MatrixChanged?.Invoke(GetDots());
         }
@@ -177,7 +177,7 @@ namespace DotMatrixMN
             return dots;
         }
 
-        public Bitmap getBitmap()
+        public Bitmap GetBitmap()
         {
             Bitmap bmp = new Bitmap(MatrixWidth, MatrixHeight);
 
@@ -189,7 +189,7 @@ namespace DotMatrixMN
             return bmp;
         }
 
-        public void setMatrix(int[] charToDisplay)
+        public void SetMatrix(int[] charToDisplay)
         {
             if (charToDisplay.Length != MatrixHeight)
             {
@@ -231,7 +231,7 @@ namespace DotMatrixMN
                 }
             }
             this.Invalidate();
-            onMatrixChanged();
+            OnMatrixChanged();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -294,7 +294,7 @@ namespace DotMatrixMN
 
             }
 
-            onMatrixChanged();
+            OnMatrixChanged();
         }
 
         protected override void OnResize(EventArgs e)
